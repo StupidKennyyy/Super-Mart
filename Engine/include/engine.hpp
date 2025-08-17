@@ -31,7 +31,6 @@ public:
 	SDL_Renderer* Renderer = nullptr;
 	Map map;
 	RenderSystem RenderSys;
-	Camera camera;
 	
 	int WindowHeight = 0;
 	int WindowWidth = 0;

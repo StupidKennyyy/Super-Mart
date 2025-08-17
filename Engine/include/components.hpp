@@ -8,17 +8,13 @@ struct Vector2 {
 
 struct Transform {
 
-	Vector2 Position{ 0,0 };
+	Vector2 Position;
 
-	struct Size {
-		float width, height;
-	};
-
-
-	Size Size{ 0,0 };
-
-	Transform() {};
-
+	Vector2 Size;
 };
 
+struct RigidBody {
 
+	Vector2 Velocity;
+
+};

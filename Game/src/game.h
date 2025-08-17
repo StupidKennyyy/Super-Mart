@@ -2,6 +2,8 @@
 #include <engine.hpp>
 #include <camera.hpp>
 #include <input.h>
+#include <ecs.hpp>
+#include <components.hpp>
 
 class Game {
 
@@ -10,9 +12,10 @@ public:
 	bool isRunning = false;
 
 	Engine engine;
-	Camera camera;
 	Map map;
 	Input input;
+	Coordinator coordinator;
+	CameraManager cameraManager;
 
 public:
 
@@ -24,7 +27,7 @@ public:
 
 	void Render();
 	
-	Game() {}
+	Game() : cameraManager(input) {}
 	~Game() {}
 
 private:

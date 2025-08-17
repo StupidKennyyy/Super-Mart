@@ -1,9 +1,45 @@
 #pragma once
+#include <components.hpp>
+#include <input.h>
 
-struct Camera {
 
-	float x = 0.f;
-	float y = 0.f;
+class CameraManager {
+
+private:
+
+	Transform transform;
 	float zoom = 1.f;
+	RigidBody rb;
+	float speed = 0.1f;
+	Input& input;
+
+public:
+
+	CameraManager(Input& input) : input(input) {}
+
+	void Update()
+	{
+		
+		rb.Velocity = { 0,0 };
+
+		if (input.isKeyDown(SDL_SCANCODE_W)) rb.Velocity.y = 1;
+		if (input.isKeyDown(SDL_SCANCODE_S)) rb.Velocity.y = -1;
+		if (input.isKeyDown(SDL_SCANCODE_A)) rb.Velocity.x = 1;
+		if (input.isKeyDown(SDL_SCANCODE_D)) rb.Velocity.x = -1;
+
+		transform.Position.x += rb.Velocity.x * speed;
+		transform.Position.y += rb.Velocity.y * speed;
+
+	}
+
+	void SetPosition(Vector2 position)
+	{
+		transform.Position = position;
+	}
+
+	const Vector2 GetPosition() const
+	{
+		return transform.Position;
+	}
 
 };

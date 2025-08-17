@@ -4,7 +4,10 @@ void Game::Init(const char* title, int width, int height)
 {
 	map.InitializeGrid(20,20);
 	engine.Init(title, width, height);
+	coordinator.Init();
 	isRunning = true;
+
+	cameraManager.SetPosition({ 0,0 });
 
 }
 
@@ -12,8 +15,6 @@ void Game::Run()
 {
 	SDL_Event e;
 
-	camera.x = 160 - 400;
-	camera.y = 160 - 300;
 
 	while (true) {
 	
@@ -35,7 +36,7 @@ void Game::Render()
 	SDL_SetRenderDrawColor(renderer,0, 0, 0, 255);
 	SDL_RenderClear(renderer);
 
-	map.RenderGrid(engine.GetRenderer(), camera);
+	map.RenderGrid(engine.GetRenderer(), cameraManager.GetPosition());
 
 	SDL_RenderPresent(renderer);
 
@@ -44,19 +45,7 @@ void Game::Render()
 
 void Game::UpdateCamera()
 {
-
-	if (input.isKeyDown(SDL_SCANCODE_W))
-		camera.y += 0.01f;
-	
-	if (input.isKeyDown(SDL_SCANCODE_S))
-		camera.y -= 0.01f;
-
-	if (input.isKeyDown(SDL_SCANCODE_A))
-		camera.x += 0.01f;
-
-	if (input.isKeyDown(SDL_SCANCODE_D))
-		camera.x -= 0.01f;
-
+	cameraManager.Update();
 }
 
 void Game::DeInit()

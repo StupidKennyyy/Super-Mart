@@ -22,7 +22,7 @@ void Map::InitializeGrid(const size_t GridWitdh, const size_t GridHeight)
 	}
 }
 
-void Map::RenderGrid(SDL_Renderer* renderer, Camera& camera) 
+void Map::RenderGrid(SDL_Renderer* renderer, const Vector2& CameraPosition) 
 {
 
 	for (size_t x = 0; x < Grid_Width; x++)
@@ -31,8 +31,8 @@ void Map::RenderGrid(SDL_Renderer* renderer, Camera& camera)
 		for (size_t y = 0; y < Grid_Height; y++)
 		{
 
-			float drawX = (x * TileSize + camera.x) * camera.zoom;
-			float drawY = (y * TileSize + camera.y) * camera.zoom;
+			float drawX = x * TileSize + CameraPosition.x;
+			float drawY = y * TileSize + CameraPosition.y;
 
 			SDL_FRect rect = { drawX, drawY, TileSize, TileSize };
 

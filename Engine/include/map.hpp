@@ -21,7 +21,7 @@ private:
 public:
 
 	void InitializeGrid(const size_t GridWitdh, const size_t GridHeight);
-	void RenderGrid(SDL_Renderer* renderer, Camera& camera);
+	void RenderGrid(SDL_Renderer* renderer, const Vector2& CameraPosition);
 
 };
 
