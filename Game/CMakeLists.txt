@@ -17,8 +17,8 @@ add_custom_command(
 	$<TARGET_FILE_DIR:Game>
 )
 
-file(COPY "${CMAKE_SOURCE_DIR}/assets/"
-     DESTINATION "${CMAKE_BINARY_DIR}/assets/")
+file(COPY "${CMAKE_SOURCE_DIR}/Assets/"
+     DESTINATION "${CMAKE_BINARY_DIR}/Assets/")
 
 
 

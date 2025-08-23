@@ -34,12 +34,6 @@ void Game::Init(const char* title, int width, int height)
 	tileRenderSys->init(engine.GetRenderer());
 	spriteRenderSys->init(engine.GetRenderer());
 
-
-	std::cout << GetAssetsPath().string() << std::endl;
-
-	std::cout << GetExecutablePath() << std::endl;
-
-
 }
 
 void Game::Run()

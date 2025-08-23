@@ -7,6 +7,8 @@ std::unordered_map<std::string, SDL_Texture*> g_Textures;
 
 void AssetManager::LoadTextures(std::filesystem::path AssetsDir, SDL_Renderer* renderer)
 {
+	std::cout << "Assets Path -> " << AssetsDir.string() << std::endl;
+
 	if (!fs::exists(AssetsDir) && !fs::is_directory(AssetsDir))
 		return;
 

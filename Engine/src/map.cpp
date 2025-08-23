@@ -13,20 +13,29 @@ void Map::InitializeGrid(const size_t GridWidth, const size_t GridHeight, Coordi
 
 		for (size_t y = 0; y < Grid_Height; y++)
 		{
+			Entity tile = coordinator.CreateEntity();
+
 			TileType type;
 
 			if (y < Grid_Height / 2)
+			{
 				type = TileType::Air;
+				coordinator.AddComponent<Sprite>(tile,
+					Sprite{
+						.texture = g_Textures["AIR.png"]
+					});
+			}
+
 			else
+			{
 				type = TileType::Ground;
+				coordinator.AddComponent<Sprite>(tile,
+					Sprite{
+						.texture = g_Textures["GROUND.png"]
+					});
 
-			
-			Entity tile = coordinator.CreateEntity();
+			}
 
-			coordinator.AddComponent<Sprite>(tile,
-				Sprite{
-					.texture = g_Textures["PLAYER.png"]
-				});
 
 			coordinator.AddComponent<Transform>(tile,
 				Transform{

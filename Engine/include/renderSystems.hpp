@@ -47,8 +47,9 @@ public:
 				//std::cout << "AIR" << std::endl;
 				break;
 			case TileType::Ground:
-				SDL_SetRenderDrawColor(Renderer, 0, 255, 0, 255);
-				SDL_RenderFillRect(Renderer, &rect);
+			//	SDL_SetRenderDrawColor(Renderer, 0, 255, 0, 255);
+			//	SDL_RenderFillRect(Renderer, &rect);
+				SDL_RenderTexture(Renderer, sprite.texture, NULL, &rect);
 				//std::cout << "GROUND" << std::endl;
 				break;
 			}
