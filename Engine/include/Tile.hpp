@@ -5,7 +5,7 @@ enum TileType {
 	Ground
 };
 
-struct Tile {
+struct tile {
 	TileType Type{ TileType::Air };
 	Transform Tf;
 };

@@ -1,9 +1,7 @@
 #pragma once
 
 #include <SDL3/SDL.h>
-#pragma once
-#include <map.hpp>
-#include <camera.hpp>
+#include <SDL3_image/SDL_image.h>
 
 class Engine {
 
@@ -29,8 +27,6 @@ public:
 
 	SDL_Window* Window = nullptr;
 	SDL_Renderer* Renderer = nullptr;
-	Map map;
-	RenderSystem RenderSys;
 	
 	int WindowHeight = 0;
 	int WindowWidth = 0;

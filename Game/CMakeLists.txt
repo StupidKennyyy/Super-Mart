@@ -10,6 +10,18 @@ add_custom_command(
 	$<TARGET_FILE_DIR:Game>
 )
 
+add_custom_command(
+	TARGET Game POST_BUILD 
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different 
+	"${CMAKE_SOURCE_DIR}/frameworks/SDL3_image/lib/x64/SDL3_image.dll"
+	$<TARGET_FILE_DIR:Game>
+)
+
+file(COPY "${CMAKE_SOURCE_DIR}/assets/"
+     DESTINATION "${CMAKE_BINARY_DIR}/assets/")
+
+
+
 
 
 

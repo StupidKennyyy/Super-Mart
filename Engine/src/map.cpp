@@ -1,54 +1,58 @@
 #include <map.hpp>
+#include <asset_manager.hpp>
 
 
-void Map::InitializeGrid(const size_t GridWitdh, const size_t GridHeight)
+void Map::InitializeGrid(const size_t GridWidth, const size_t GridHeight, Coordinator& coordinator)
 {
 	Grid_Height = GridHeight;
-	Grid_Width = GridWitdh;
-
-	MapGrid.resize(Grid_Width);
+	Grid_Width = GridWidth;
+	
 
 	for (size_t x = 0; x < Grid_Width; x++)
 	{
-		MapGrid[x].resize(Grid_Height);
 
 		for (size_t y = 0; y < Grid_Height; y++)
 		{
+			TileType type;
+
 			if (y < Grid_Height / 2)
-				MapGrid[x][y].Type = TileType::Air;
+				type = TileType::Air;
 			else
-				MapGrid[x][y].Type = TileType::Ground;
+				type = TileType::Ground;
+
+			
+			Entity tile = coordinator.CreateEntity();
+
+			coordinator.AddComponent<Sprite>(tile,
+				Sprite{
+					.texture = g_Textures["PLAYER.png"]
+				});
+
+			coordinator.AddComponent<Transform>(tile,
+				Transform{
+					.Position = Vector2((float)(x * TileSize),(float)(y * TileSize)),
+					.Size = Vector2((float)(TileSize), (float)(TileSize))
+					
+				});
+
+			coordinator.AddComponent<Tile>(tile,
+				Tile{
+					.type = type
+				});
+
+			if (type == TileType::Ground)
+				coordinator.AddComponent<Collider>(tile,
+					Collider{
+						.isSolid = true
+					});
+			else
+				coordinator.AddComponent<Collider>(tile,
+					Collider{
+						.isSolid = false
+					});
+
+
 		}
 	}
 }
 
-void Map::RenderGrid(SDL_Renderer* renderer, const Vector2& CameraPosition) 
-{
-
-	for (size_t x = 0; x < Grid_Width; x++)
-	{
-
-		for (size_t y = 0; y < Grid_Height; y++)
-		{
-
-			float drawX = x * TileSize + CameraPosition.x;
-			float drawY = y * TileSize + CameraPosition.y;
-
-			SDL_FRect rect = { drawX, drawY, TileSize, TileSize };
-
-			switch (MapGrid[x][y].Type)
-			{
-			case TileType::Air:
-				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-				//std::cout << "AIR" << std::endl;
-				break;
-			case TileType::Ground:
-				SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-				//std::cout << "GROUND" << std::endl;
-				break;
-			}
-
-			SDL_RenderFillRect(renderer, &rect);
-		}
-	}
-}

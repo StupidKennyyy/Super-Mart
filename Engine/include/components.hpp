@@ -18,3 +18,15 @@ struct RigidBody {
 	Vector2 Velocity;
 
 };
+
+struct Collider {
+	bool isSolid;
+};
+
+struct Tile {
+	int type;
+};
+
+struct Sprite {
+	SDL_Texture* texture;
+};

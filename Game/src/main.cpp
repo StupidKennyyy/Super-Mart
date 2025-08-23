@@ -1,7 +1,4 @@
-﻿// Super Mart.cpp : Defines the entry point for the application.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <SDL3/SDL.h>
 #include "game.h"
 

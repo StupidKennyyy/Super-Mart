@@ -1,3 +1,4 @@
+#pragma once
 #include <components.hpp>
 #include <cstdint>
 #include <bitset>
@@ -7,6 +8,7 @@
 #include <unordered_map>
 #include <memory>
 #include <set>
+#include <string>
 
 using Entity = std::uint32_t;
 
@@ -264,25 +266,25 @@ public:
 	template<typename T>
 	std::shared_ptr<T> RegisterSystem()
 	{
-		const char* typeName = typeid(T).name();
+		const std::string typeName = typeid(T).name();
 
 		assert(M_Systems.find(typeName) == M_Systems.end() && "Registering system more than once.");
 
 		// Create a pointer to the system and return it so it can be used externally
 		auto system = std::make_shared<T>();
-		M_Systems.insert({ typeName, system });
+		M_Systems.insert(std::make_pair(typeName,std::static_pointer_cast<System>(system)));
 		return system;
 	}
 
 	template<typename T>
 	void SetSignature(Signature signature)
 	{
-		const char* typeName = typeid(T).name();
+		const std::string typeName = typeid(T).name();
 
 		assert(M_Systems.find(typeName) != M_Systems.end() && "System used before registered");
 
 		// Set the signature for this system
-		m_Signatures.insert({ typeName, signature });
+		m_Signatures.insert(std::make_pair(typeName, signature));
 	}
 
 	void EntityDestroyed(Entity entity)
@@ -317,10 +319,10 @@ public:
 private:
 
 	// Map from system type string pointer to a signature
-	std::unordered_map<const char*, Signature> m_Signatures{};
+	std::unordered_map<std::string, Signature> m_Signatures{};
 
 	// Map from system type string pointer to a system pointer
-	std::unordered_map<const char*, std::shared_ptr<System>> M_Systems{};
+	std::unordered_map<std::string, std::shared_ptr<System>> M_Systems{};
 
 };
 
@@ -365,7 +367,7 @@ public:
 		m_ComponentManager->AddComponent<T>(entity, component);
 
 		auto signature = m_EntityManager->GetSignature(entity);
-		signature.set(m_ComponentManager->GetComponent<T>(), true);
+		signature.set(m_ComponentManager->GetComponentType<T>(), true);
 		m_EntityManager->SetSignature(entity, signature);
 
 		m_SystemManager->EntitySignatureChanged(entity, signature);

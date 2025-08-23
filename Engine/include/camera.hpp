@@ -1,6 +1,6 @@
 #pragma once
 #include <components.hpp>
-#include <input.h>
+#include <input.hpp>
 
 
 class CameraManager {
@@ -10,7 +10,7 @@ private:
 	Transform transform;
 	float zoom = 1.f;
 	RigidBody rb;
-	float speed = 0.1f;
+	float speed = 1.0f;
 	Input& input;
 
 public:
