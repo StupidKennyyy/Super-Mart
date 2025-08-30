@@ -2,6 +2,9 @@
 
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
+#include <ecs.hpp>
+#include <renderSystems.hpp>
+#include <asset_manager.hpp>
 
 class Engine {
 
@@ -28,6 +31,13 @@ public:
 	SDL_Window* Window = nullptr;
 	SDL_Renderer* Renderer = nullptr;
 	
+	Coordinator coordinator;
+
+	std::shared_ptr<TileRenderSystem> tileRenderSys;
+	std::shared_ptr<SpriteRenderSystem> spriteRenderSys;
+
+	AssetManager assetManager;
+
 	int WindowHeight = 0;
 	int WindowWidth = 0;
 	

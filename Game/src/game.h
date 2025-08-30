@@ -13,18 +13,12 @@ class Game {
 
 public:
 	
-	bool isRunning = false;
-
 	Engine engine;
 	Map map;
 	Input input;
-	Coordinator coordinator;
 	CameraManager cameraManager;
 
-	std::shared_ptr<TileRenderSystem> tileRenderSys;
-	std::shared_ptr<SpriteRenderSystem> spriteRenderSys;
-
-	AssetManager assetManager;
+	SDL_Renderer* renderer;
 
 public:
 

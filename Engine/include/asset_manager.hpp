@@ -19,6 +19,7 @@ public:
 
 	void LoadTextures(std::filesystem::path AssetsDir, SDL_Renderer* renderer);
 	
+	void DeloadTextures();
 };
 
 

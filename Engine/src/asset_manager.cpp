@@ -15,7 +15,7 @@ void AssetManager::LoadTextures(std::filesystem::path AssetsDir, SDL_Renderer* r
 	for (const auto& entry : fs::directory_iterator(AssetsDir))
 	{
 
-		std::cout << entry.path() << std::endl;
+		//std::cout << entry.path() << std::endl;
 
 		fs::path filePath = entry.path();
 
@@ -35,10 +35,17 @@ void AssetManager::LoadTextures(std::filesystem::path AssetsDir, SDL_Renderer* r
 		g_Textures[fileName] = texture;
 
 		std::cout << "Loaded: " << fileName << std::endl;
-
-		std::cout << g_Textures[fileName]->format << std::endl;
 		
 	}
 
 }
 
+void AssetManager::DeloadTextures()
+{
+	for (auto pair : g_Textures)
+	{
+		SDL_DestroyTexture(pair.second);
+	}
+
+	g_Textures.clear();
+}
