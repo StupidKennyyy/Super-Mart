@@ -38,7 +38,7 @@ public:
 	bool wasMouseButtonReleased(Uint8 button);
 
 	Vector2 getMousePosition();
-	void ProcessInput(SDL_Event& e);
+	void ProcessInput(bool& isRunning);
 
 	void updateState();
 };

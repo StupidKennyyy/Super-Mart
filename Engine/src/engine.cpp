@@ -14,6 +14,8 @@ void Engine::Init(const char* Title, const int witdh, const int height)
 		SDL_Log("Renderer creation failed: %s", SDL_GetError());
 	SDL_SetRenderScale(Renderer, 2, 2);
 
+	isRunning = true;
+
 }
 
 void Engine::Deinit()

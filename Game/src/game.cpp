@@ -5,7 +5,7 @@ void Game::Init(const char* title, int width, int height)
 {
 	engine.Init(title, width, height);
 	coordinator.Init();
-	isRunning = true;	
+
 
 	coordinator.RegisterComponent<Transform>();
 	coordinator.RegisterComponent<Vector2>();
@@ -41,9 +41,9 @@ void Game::Run()
 	SDL_Event e;
 
 
-	while (true) {
+	while (engine.isRunning) {
 	
-		input.ProcessInput(e);
+		input.ProcessInput(engine.isRunning);
 
 		UpdateCamera();
 

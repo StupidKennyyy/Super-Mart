@@ -30,5 +30,6 @@ public:
 	
 	int WindowHeight = 0;
 	int WindowWidth = 0;
-
+	
+	bool isRunning = false;
 };
