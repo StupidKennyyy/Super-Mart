@@ -30,3 +30,13 @@ struct Tile {
 struct Sprite {
 	SDL_Texture* texture;
 };
+
+struct InputComponent {
+
+    bool up = false;
+    bool down = false;
+    bool left = false;
+    bool right = false;
+    bool jump = false;
+
+};

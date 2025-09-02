@@ -3,8 +3,11 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <ecs.hpp>
-#include <renderSystems.hpp>
+#include <render_systems.hpp>
 #include <asset_manager.hpp>
+#include <camera.hpp>
+#include <movement_system.hpp>
+#include <input_system.hpp>
 
 class Engine {
 
@@ -16,15 +19,7 @@ public:
 
 	Engine() {};
 
-	SDL_Renderer* GetRenderer() const
-	{
-		return Renderer;
-	}
-
-	SDL_Window* GetWindow() const
-	{
-		return Window;
-	}
+	void Render(CameraManager& cameraManager);
 
 public:
 
@@ -35,9 +30,11 @@ public:
 
 	std::shared_ptr<TileRenderSystem> tileRenderSys;
 	std::shared_ptr<SpriteRenderSystem> spriteRenderSys;
+	std::shared_ptr<InputSystem> inputSys;
+	std::shared_ptr<MovementSystem> movementSys;
 
 	AssetManager assetManager;
-
+	
 	int WindowHeight = 0;
 	int WindowWidth = 0;
 	

@@ -1,4 +1,4 @@
-#include "game.h"
+#include "game.hpp"
 #include <pathUtils.hpp>
 
 void Game::Init(const char* title, int width, int height)
@@ -9,7 +9,14 @@ void Game::Init(const char* title, int width, int height)
 
 	map.InitializeGrid(20,20, engine.coordinator);
 
-	renderer = engine.GetRenderer();
+	renderer = engine.Renderer;
+
+	player.CreatePlayer(Transform{
+		.Position = {100,100},
+		.Size = {20,20}
+		}, 
+		engine.coordinator
+	);
 
 }
 
@@ -20,31 +27,19 @@ void Game::Run()
 	
 		input.ProcessInput(engine.isRunning);
 
-		UpdateCamera();
+		cameraManager.Update();
 
-		Render();
+		engine.inputSys->Update(engine.coordinator, input);
+
+		engine.movementSys->Update(engine.coordinator);
+
+		engine.Render(cameraManager);
 
 		input.updateState();
 	}
 
 }
 
-void Game::Render()
-{
-	SDL_SetRenderDrawColor(renderer,0, 0, 0, 255);
-	SDL_RenderClear(renderer);
-
-	engine.tileRenderSys->Render(engine.coordinator, cameraManager.GetPosition());
-
-	SDL_RenderPresent(renderer);
-
-
-}
-
-void Game::UpdateCamera()
-{
-	cameraManager.Update();
-}
 
 void Game::DeInit()
 {

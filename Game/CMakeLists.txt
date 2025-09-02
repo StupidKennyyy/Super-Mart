@@ -1,5 +1,5 @@
 ﻿
-add_executable (Game src/main.cpp "src/game.h" "src/game.cpp")
+add_executable (Game src/main.cpp "src/game.hpp" "src/game.cpp"  "src/player.hpp")
 
 target_link_libraries(Game PRIVATE Engine)
 

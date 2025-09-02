@@ -13,9 +13,16 @@ private:
 	float speed = 1.0f;
 	Input& input;
 
+	Entity follow;
+
 public:
 
 	CameraManager(Input& input) : input(input) {}
+
+	void FollowEntity(Entity entity)
+	{
+		follow = entity;
+	}
 
 	void Update()
 	{

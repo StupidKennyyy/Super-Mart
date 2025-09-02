@@ -4,15 +4,17 @@
 #include <input.hpp>
 #include <ecs.hpp>
 #include <components.hpp>
-#include <renderSystems.hpp>
-#include <asset_manager.hpp>
 #include <SDL3_image/SDL_image.h>
 #include <map.hpp>
+#include "player.hpp"
+
 
 class Game {
 
 public:
 	
+	Player player;
+
 	Engine engine;
 	Map map;
 	Input input;
