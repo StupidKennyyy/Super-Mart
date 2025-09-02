@@ -8,6 +8,7 @@
 #include <camera.hpp>
 #include <movement_system.hpp>
 #include <input_system.hpp>
+#include <camera_system.hpp>
 
 class Engine {
 
@@ -19,7 +20,7 @@ public:
 
 	Engine() {};
 
-	void Render(CameraManager& cameraManager);
+	void Render();
 
 public:
 
@@ -32,9 +33,12 @@ public:
 	std::shared_ptr<SpriteRenderSystem> spriteRenderSys;
 	std::shared_ptr<InputSystem> inputSys;
 	std::shared_ptr<MovementSystem> movementSys;
+	std::shared_ptr<CameraSystem> cameraSys;
 
 	AssetManager assetManager;
-	
+
+	CameraManager cameraManager;
+
 	int WindowHeight = 0;
 	int WindowWidth = 0;
 	

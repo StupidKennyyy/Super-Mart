@@ -1,3 +1,4 @@
+#pragma once
 #include <ecs.hpp>
 #include <components.hpp>
 

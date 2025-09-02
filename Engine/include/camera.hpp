@@ -1,52 +1,108 @@
 #pragma once
 #include <components.hpp>
 #include <input.hpp>
+#include <vector>
+#include <cstdint>
+#include <queue>
+#include <cassert>
+#include <array>
 
+
+using Camera = uint8_t;
+
+constexpr Camera MAX_CAMERA_COUNT = 10;
+
+constexpr Camera INVALID_CAMERA = MAX_CAMERA_COUNT;
+
+
+
+struct CameraData {
+
+	Vector2 Position;
+
+};
 
 class CameraManager {
 
 private:
 
-	Transform transform;
-	float zoom = 1.f;
-	RigidBody rb;
-	float speed = 1.0f;
-	Input& input;
+	std::queue<Camera> m_AvailableCameras;
 
-	Entity follow;
+	std::array<CameraData, MAX_CAMERA_COUNT> m_CameraDatas;
+
+	Camera m_CameraCount = 0;
+
+	Camera m_ActiveCamera = INVALID_CAMERA;
 
 public:
 
-	CameraManager(Input& input) : input(input) {}
-
-	void FollowEntity(Entity entity)
+	CameraManager()
 	{
-		follow = entity;
+		for (Camera camera = 0; camera < MAX_CAMERA_COUNT; camera++)
+			m_AvailableCameras.push(camera);
 	}
 
-	void Update()
+	Camera CreateCamera()
 	{
-		
-		rb.Velocity = { 0,0 };
+		assert(m_CameraCount < MAX_CAMERA_COUNT && "Too many cameras in existance.");
 
-		if (input.isKeyDown(SDL_SCANCODE_W)) rb.Velocity.y = 1;
-		if (input.isKeyDown(SDL_SCANCODE_S)) rb.Velocity.y = -1;
-		if (input.isKeyDown(SDL_SCANCODE_A)) rb.Velocity.x = 1;
-		if (input.isKeyDown(SDL_SCANCODE_D)) rb.Velocity.x = -1;
+		Camera id = m_AvailableCameras.front();
+		m_AvailableCameras.pop();
 
-		transform.Position.x += rb.Velocity.x * speed;
-		transform.Position.y += rb.Velocity.y * speed;
+		m_CameraCount++;
+		return id;
+	}
+
+	void DestroyCamera(Camera camera)
+	{
+		assert(camera < MAX_CAMERA_COUNT && "Camera out of range.");
+
+		m_CameraDatas[camera] = CameraData{};
+		m_AvailableCameras.push(camera);
+		m_CameraCount--;
+	}
+
+	CameraData& GetData(Camera camera)
+	{
+		assert(camera < MAX_CAMERA_COUNT && "Camera out of range.");
+
+		return m_CameraDatas[camera];
 
 	}
 
-	void SetPosition(Vector2 position)
+	void SetData(Camera camera, const CameraData data)
 	{
-		transform.Position = position;
+		assert(camera < MAX_CAMERA_COUNT && "Camera out of range.");
+
+		m_CameraDatas[camera] = data;
+
 	}
 
-	const Vector2 GetPosition() const
+	Camera GetActiveCount() const
 	{
-		return transform.Position;
+		return m_CameraCount;
+	}
+
+	Camera GetActiveCamera() const
+	{
+		return m_ActiveCamera;
+	}
+
+	void SetActiveCamera(Camera camera)
+	{
+		if (camera < MAX_CAMERA_COUNT)
+			m_ActiveCamera = camera;
+		else
+			m_ActiveCamera = INVALID_CAMERA;
+	}
+
+	CameraData& GetActiveCameraData()
+	{
+		if (m_ActiveCamera == INVALID_CAMERA)
+			return m_CameraDatas[0];
+		else
+			return m_CameraDatas[m_ActiveCamera];
 	}
 
 };
+

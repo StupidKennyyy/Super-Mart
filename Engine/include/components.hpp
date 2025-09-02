@@ -1,8 +1,10 @@
 #pragma once
+#include <cstdint>
 
 struct Vector2 {
 
-	float x, y;
+	float x = 0.0f;
+	float y = 0.0f;
 };
 
 
@@ -16,18 +18,20 @@ struct Transform {
 struct RigidBody {
 
 	Vector2 Velocity;
-
 };
 
 struct Collider {
+
 	bool isSolid;
 };
 
 struct Tile {
+
 	int type;
 };
 
 struct Sprite {
+
 	SDL_Texture* texture;
 };
 
@@ -39,4 +43,9 @@ struct InputComponent {
     bool right = false;
     bool jump = false;
 
+};
+
+struct CameraFollow {
+
+	uint8_t CameraID;
 };

@@ -16,6 +16,7 @@ void Engine::Init(const char* Title, const int witdh, const int height)
 
 	coordinator.Init();
 
+	// Components
 
 	coordinator.RegisterComponent<Transform>();
 	coordinator.RegisterComponent<Vector2>();
@@ -24,7 +25,9 @@ void Engine::Init(const char* Title, const int witdh, const int height)
 	coordinator.RegisterComponent<Tile>();
 	coordinator.RegisterComponent<Sprite>();
 	coordinator.RegisterComponent<InputComponent>();
+	coordinator.RegisterComponent<CameraFollow>();
 
+	// Systems
 
 	tileRenderSys = coordinator.RegisterSystem<TileRenderSystem>();
 	Signature tileRenderSig;
@@ -54,6 +57,15 @@ void Engine::Init(const char* Title, const int witdh, const int height)
 	coordinator.SetSystemSignature<InputSystem>(inputSig);
 
 
+	cameraSys = coordinator.RegisterSystem<CameraSystem>();
+	Signature camSig;
+	camSig.set(coordinator.GetComponentType<CameraFollow>(), true);
+	camSig.set(coordinator.GetComponentType<Transform>(), true);
+	camSig.set(coordinator.GetComponentType<RigidBody>(), true);
+	coordinator.SetSystemSignature<CameraSystem>(camSig);
+
+	// Other
+
 	assetManager.LoadTextures(GetAssetsPath(), Renderer);
 
 	tileRenderSys->init(Renderer);
@@ -65,14 +77,14 @@ void Engine::Init(const char* Title, const int witdh, const int height)
 
 
 
-void Engine::Render(CameraManager& cameraManager)
+void Engine::Render()
 {
 
 	SDL_SetRenderDrawColor(Renderer,0, 0, 0, 255);
 	SDL_RenderClear(Renderer);
 
-	tileRenderSys->Render(coordinator, cameraManager.GetPosition());
-	spriteRenderSys->Render(coordinator, cameraManager.GetPosition());
+	tileRenderSys->Render(coordinator, cameraManager.GetActiveCameraData().Position);
+	spriteRenderSys->Render(coordinator, cameraManager.GetActiveCameraData().Position);
 
 	SDL_RenderPresent(Renderer);
 

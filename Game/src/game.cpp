@@ -5,17 +5,23 @@ void Game::Init(const char* title, int width, int height)
 {
 	engine.Init(title, width, height);
 
-	cameraManager.SetPosition({ 0,0 });
-
 	map.InitializeGrid(20,20, engine.coordinator);
 
 	renderer = engine.Renderer;
 
+	Camera PlayerCam = engine.cameraManager.CreateCamera();
+	engine.cameraManager.SetActiveCamera(PlayerCam);
+
+	Camera active = engine.cameraManager.GetActiveCamera();
+
+	engine.cameraManager.SetData(active, CameraData{ .Position = Vector2{100,100} });
+
 	player.CreatePlayer(Transform{
 		.Position = {100,100},
 		.Size = {20,20}
-		}, 
-		engine.coordinator
+		},
+		engine.coordinator,
+		engine.cameraManager
 	);
 
 }
@@ -27,13 +33,13 @@ void Game::Run()
 	
 		input.ProcessInput(engine.isRunning);
 
-		cameraManager.Update();
-
 		engine.inputSys->Update(engine.coordinator, input);
+
+		engine.cameraSys->Update(engine.cameraManager, engine.coordinator);
 
 		engine.movementSys->Update(engine.coordinator);
 
-		engine.Render(cameraManager);
+		engine.Render();
 
 		input.updateState();
 	}

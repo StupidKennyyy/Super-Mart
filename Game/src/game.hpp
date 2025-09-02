@@ -16,9 +16,10 @@ public:
 	Player player;
 
 	Engine engine;
+
 	Map map;
+
 	Input input;
-	CameraManager cameraManager;
 
 	SDL_Renderer* renderer;
 
@@ -30,13 +31,8 @@ public:
 
 	void DeInit();
 
-	void Render();
 	
-	Game() : cameraManager(input) {}
+	Game() {}
 	~Game() {}
-
-private:
-
-	void UpdateCamera();
 
 };

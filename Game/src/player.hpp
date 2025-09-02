@@ -16,17 +16,24 @@ public:
 		return player;
 	}
 
-	void CreatePlayer(Transform transform, Coordinator& coordinator)
+	void CreatePlayer(Transform transform, Coordinator& coordinator, CameraManager cameraManager)
 	{
 		player = coordinator.CreateEntity();
 
 		coordinator.AddComponent<Transform>(player, transform);
+
 		coordinator.AddComponent<Sprite>(player,
 			Sprite{
 				.texture = g_Textures["PLAYER.png"]
 			});
 		coordinator.AddComponent<RigidBody>(player, RigidBody{});
+
 		coordinator.AddComponent<InputComponent>(player, InputComponent{});
+
+		coordinator.AddComponent<CameraFollow>(player,
+			CameraFollow{
+				.CameraID = cameraManager.GetActiveCamera()
+			});
 
 	}
 
