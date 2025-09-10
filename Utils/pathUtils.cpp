@@ -2,9 +2,12 @@
 #include "pathUtils.hpp"
 
 #include <Windows.h>
+#include <iostream>
 
 std::filesystem::path GetExecutablePath()
 {
+	
+	std::cout << "Current working dir: " << std::filesystem::current_path() << "\n";
 
 	char buffer[1024];
 

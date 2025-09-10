@@ -4,20 +4,26 @@
 
 void Map::InitializeGrid(const size_t GridWidth, const size_t GridHeight, Coordinator& coordinator)
 {
-	Grid_Height = GridHeight;
-	Grid_Width = GridWidth;
+	m_Grid_Height = GridHeight;
+	m_Grid_Width = GridWidth;
+
+	m_MapGrid.resize(m_Grid_Width);
 	
 
-	for (size_t x = 0; x < Grid_Width; x++)
+	for (size_t x = 0; x < m_Grid_Width; x++)
 	{
+		m_MapGrid[x].resize(GridHeight);
 
-		for (size_t y = 0; y < Grid_Height; y++)
+		for (size_t y = 0; y < m_Grid_Height; y++)
 		{
+
 			Entity tile = coordinator.CreateEntity();
+
+			m_MapGrid[x][y] = tile;
 
 			TileType type;
 
-			if (y < Grid_Height / 2)
+			if (y < m_Grid_Height / 2)
 			{
 				type = TileType::Air;
 				coordinator.AddComponent<Sprite>(tile,
@@ -52,12 +58,17 @@ void Map::InitializeGrid(const size_t GridWidth, const size_t GridHeight, Coordi
 			if (type == TileType::Ground)
 				coordinator.AddComponent<Collider>(tile,
 					Collider{
-						.isSolid = true
+						.isSolid = true,
+						.Size = {(float)TileSize, (float)TileSize},
+						.tag = CollisionTag::Tile
 					});
-			else
+
+			else if (type == TileType::Air)
 				coordinator.AddComponent<Collider>(tile,
 					Collider{
-						.isSolid = false
+						.isSolid = false,
+						.Size = {(float)TileSize, (float)TileSize},
+						.tag = CollisionTag::Tile
 					});
 
 

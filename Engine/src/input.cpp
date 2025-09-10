@@ -118,12 +118,17 @@ Vector2 Input::getMousePosition()
 
 // Handle input
 
-void Input::ProcessInput(SDL_Event& e)
+void Input::ProcessInput(bool& isRunning)
 {
+	SDL_Event e;
 	
 	while (SDL_PollEvent(&e))
 	{
 		switch (e.type) {
+			
+			case SDL_EVENT_QUIT:
+				isRunning = false;
+				break;
 
 			case SDL_EVENT_KEY_DOWN:
 				onKeyDown(e.key.scancode);
@@ -146,7 +151,7 @@ void Input::ProcessInput(SDL_Event& e)
 
 void Input::updateState()
 {
-
+	
 	for (auto& button : mouseInputStates)
 		button.second.wasDownLastFrame = button.second.isDown;
 

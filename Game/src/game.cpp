@@ -1,77 +1,53 @@
-#include "game.h"
+#include "game.hpp"
 #include <pathUtils.hpp>
 
 void Game::Init(const char* title, int width, int height)
 {
 	engine.Init(title, width, height);
-	coordinator.Init();
-	isRunning = true;	
 
-	coordinator.RegisterComponent<Transform>();
-	coordinator.RegisterComponent<Vector2>();
-	coordinator.RegisterComponent<RigidBody>();
-	coordinator.RegisterComponent<Collider>();
-	coordinator.RegisterComponent<Tile>();
-	coordinator.RegisterComponent<Sprite>();
+	map.InitializeGrid(20,20, engine.coordinator);
 
-	tileRenderSys = coordinator.RegisterSystem<TileRenderSystem>();
-	Signature tileRenderSig;
-	tileRenderSig.set(coordinator.GetComponentType<Transform>(), true);
-	tileRenderSig.set(coordinator.GetComponentType<Tile>(), true);
-	coordinator.SetSystemSignature<TileRenderSystem>(tileRenderSig);
+	renderer = engine.Renderer;
 
-	spriteRenderSys = coordinator.RegisterSystem<SpriteRenderSystem>();
-	Signature spriteRenderSig;
-	spriteRenderSig.set(coordinator.GetComponentType<Transform>(), true);
-	spriteRenderSig.set(coordinator.GetComponentType<Sprite>(), true);
+	Camera PlayerCam = engine.cameraManager.CreateCamera();
+	engine.cameraManager.SetActiveCamera(PlayerCam);
 
-	assetManager.LoadTextures(GetAssetsPath(), engine.GetRenderer());
+	Camera active = engine.cameraManager.GetActiveCamera();
 
-	cameraManager.SetPosition({ 0,0 });
+	engine.cameraManager.SetData(active, CameraData{ .Position = Vector2{100,100} });
 
-	map.InitializeGrid(20,20, coordinator);
-
-	tileRenderSys->init(engine.GetRenderer());
-	spriteRenderSys->init(engine.GetRenderer());
+	player.CreatePlayer(Transform{
+		.Position = {100,100},
+		.Size = {40,40}
+		},
+		engine.coordinator,
+		engine.cameraManager
+	);
 
 }
 
 void Game::Run()
 {
-	SDL_Event e;
 
-
-	while (true) {
+	while (engine.isRunning) {
 	
-		input.ProcessInput(e);
+		input.ProcessInput(engine.isRunning);
 
-		UpdateCamera();
+		engine.inputSys->Update(engine.coordinator, input);
 
-		Render();
+		engine.cameraSys->Update(engine.cameraManager, engine.coordinator);
+
+		engine.movementSys->Update(engine.coordinator);
+
+		engine.collisionSys->Update(engine.coordinator, map);
+
+		engine.Render();
 
 		input.updateState();
 	}
 
 }
 
-void Game::Render()
-{
-	SDL_Renderer* renderer = engine.GetRenderer();
-
-	SDL_SetRenderDrawColor(renderer,0, 0, 0, 255);
-	SDL_RenderClear(renderer);
-
-	tileRenderSys->Render(coordinator, cameraManager.GetPosition());
-
-	SDL_RenderPresent(renderer);
-
-
-}
-
-void Game::UpdateCamera()
-{
-	cameraManager.Update();
-}
 
 void Game::DeInit()
 {
