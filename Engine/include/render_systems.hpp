@@ -33,8 +33,8 @@ public:
 
 			auto& sprite = coordinator.GetComponent<Sprite>(entity);
 
-			float drawX = transform.Position.x + CameraPosition.x;
-			float drawY = transform.Position.y + CameraPosition.y;
+			float drawX = transform.Position.x - CameraPosition.x;
+			float drawY = transform.Position.y - CameraPosition.y;
 
 			SDL_FRect rect = { drawX, drawY, transform.Size.x, transform.Size.y };
 
@@ -84,8 +84,8 @@ public:
 
 			auto& transform = coordinator.GetComponent<Transform>(entity);
 
-			float drawX = transform.Position.x + CameraPosition.x;
-			float drawY = transform.Position.y + CameraPosition.y;
+			float drawX = transform.Position.x - CameraPosition.x;
+			float drawY = transform.Position.y - CameraPosition.y;
 
 			SDL_FRect rect = { drawX, drawY, transform.Size.x, transform.Size.y };
 

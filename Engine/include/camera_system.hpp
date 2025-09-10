@@ -16,8 +16,8 @@ public:
 			auto& transform = coordinator.GetComponent<Transform>(entity);
 			auto& cam = camManager.GetData(follow.CameraID);
 
-			cam.Position.x = -transform.Position.x + 150;
-			cam.Position.y = -transform.Position.y + 100;
+			cam.Position.x = transform.Position.x - 400 + 10;
+			cam.Position.y = transform.Position.y - 300 + 10;
 		}
 
 	}

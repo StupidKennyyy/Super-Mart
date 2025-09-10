@@ -20,9 +20,18 @@ struct RigidBody {
 	Vector2 Velocity;
 };
 
+enum class CollisionTag {
+	None,
+	Player,
+	Enemy,
+	Tile
+};
+
 struct Collider {
 
 	bool isSolid;
+	Vector2 Size;
+	CollisionTag tag = CollisionTag::None;
 };
 
 struct Tile {

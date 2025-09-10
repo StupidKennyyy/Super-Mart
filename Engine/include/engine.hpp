@@ -9,6 +9,7 @@
 #include <movement_system.hpp>
 #include <input_system.hpp>
 #include <camera_system.hpp>
+#include <collision_system.hpp>
 
 class Engine {
 
@@ -34,6 +35,7 @@ public:
 	std::shared_ptr<InputSystem> inputSys;
 	std::shared_ptr<MovementSystem> movementSys;
 	std::shared_ptr<CameraSystem> cameraSys;
+	std::shared_ptr<CollisionSystem> collisionSys;
 
 	AssetManager assetManager;
 

@@ -52,14 +52,10 @@ void Map::InitializeGrid(const size_t GridWidth, const size_t GridHeight, Coordi
 			if (type == TileType::Ground)
 				coordinator.AddComponent<Collider>(tile,
 					Collider{
-						.isSolid = true
+						.isSolid = true,
+						.Size = {(float)TileSize, (float)TileSize},
+						.tag = CollisionTag::Tile
 					});
-			else
-				coordinator.AddComponent<Collider>(tile,
-					Collider{
-						.isSolid = false
-					});
-
 
 		}
 	}

@@ -18,7 +18,7 @@ void Game::Init(const char* title, int width, int height)
 
 	player.CreatePlayer(Transform{
 		.Position = {100,100},
-		.Size = {20,20}
+		.Size = {40,40}
 		},
 		engine.coordinator,
 		engine.cameraManager
@@ -38,6 +38,8 @@ void Game::Run()
 		engine.cameraSys->Update(engine.cameraManager, engine.coordinator);
 
 		engine.movementSys->Update(engine.coordinator);
+
+		engine.collisionSys->Update(engine.coordinator);
 
 		engine.Render();
 

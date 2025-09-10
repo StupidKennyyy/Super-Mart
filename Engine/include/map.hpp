@@ -16,7 +16,7 @@ private:
 
 	size_t Grid_Width;
 	size_t Grid_Height;
-	const int TileSize = 16;
+	const int TileSize = 40;
 
 	std::vector<std::vector<Entity>> MapGrid;
 

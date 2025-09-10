@@ -12,7 +12,7 @@ void Engine::Init(const char* Title, const int witdh, const int height)
 
 	if (!Renderer)
 		SDL_Log("Renderer creation failed: %s", SDL_GetError());
-	SDL_SetRenderScale(Renderer, 2, 2);
+//	SDL_SetRenderScale(Renderer, 2, 2);
 
 	coordinator.Init();
 
@@ -64,6 +64,11 @@ void Engine::Init(const char* Title, const int witdh, const int height)
 	camSig.set(coordinator.GetComponentType<RigidBody>(), true);
 	coordinator.SetSystemSignature<CameraSystem>(camSig);
 
+	collisionSys = coordinator.RegisterSystem<CollisionSystem>();
+	Signature colSig;
+	colSig.set(coordinator.GetComponentType<Collider>(), true);
+	coordinator.SetSystemSignature<CollisionSystem>(colSig);
+
 	// Other
 
 	assetManager.LoadTextures(GetAssetsPath(), Renderer);
@@ -83,7 +88,7 @@ void Engine::Render()
 	SDL_SetRenderDrawColor(Renderer,0, 0, 0, 255);
 	SDL_RenderClear(Renderer);
 
-	tileRenderSys->Render(coordinator, cameraManager.GetActiveCameraData().Position);
+	//tileRenderSys->Render(coordinator, cameraManager.GetActiveCameraData().Position);
 	spriteRenderSys->Render(coordinator, cameraManager.GetActiveCameraData().Position);
 
 	SDL_RenderPresent(Renderer);

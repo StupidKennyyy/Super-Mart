@@ -35,6 +35,13 @@ public:
 				.CameraID = cameraManager.GetActiveCamera()
 			});
 
+		coordinator.AddComponent<Collider>(player,
+			Collider{
+				.isSolid = true,
+				.Size = transform.Size,
+				.tag = CollisionTag::Player
+			});
+
 	}
 
 	void DeletePlayer(Coordinator coordinator)
