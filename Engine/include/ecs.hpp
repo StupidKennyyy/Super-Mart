@@ -14,6 +14,8 @@ using Entity = std::uint32_t;
 
 const Entity MAX_ENTITES = 5000;
 
+constexpr Entity NULLENTITY = MAX_ENTITES;
+
 using ComponentType = std::uint8_t;
 
 const ComponentType MAX_COMPONENTS = 32;

@@ -39,7 +39,7 @@ void Game::Run()
 
 		engine.movementSys->Update(engine.coordinator);
 
-		engine.collisionSys->Update(engine.coordinator);
+		engine.collisionSys->Update(engine.coordinator, map);
 
 		engine.Render();
 

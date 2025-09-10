@@ -31,8 +31,4 @@ public:
 
 	void DeInit();
 
-	
-	Game() {}
-	~Game() {}
-
 };
