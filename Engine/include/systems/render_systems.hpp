@@ -1,10 +1,9 @@
 #pragma once
 
-#include <SDL3/SDL.h>
 #include <vector>
-#include <ecs.hpp>
-#include <Tile.hpp>
 #include <iostream>
+#include <include.hpp>
+#include <SDL3/SDL.h>
 
 class TileRenderSystem : public System {
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <SDL3/SDL.h>
 
 struct Vector2 {
 

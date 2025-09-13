@@ -1,5 +1,4 @@
 #include "game.hpp"
-#include <pathUtils.hpp>
 
 void Game::Init(const char* title, int width, int height)
 {

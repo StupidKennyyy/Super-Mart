@@ -1,9 +1,11 @@
-#include <SDL3/SDL.h>
-#include <ecs.hpp>
+#pragma once
+
 #include <iterator>
-#include <components.hpp>
 #include <iostream>
-#include <map.hpp>
+#include <include.hpp>
+#include <map/map.hpp>
+#include <ecs/ecs.hpp>
+#include <core/engine.hpp>
 
 class CollisionSystem : public System {
 

@@ -1,11 +1,12 @@
 #pragma once
-#include <components.hpp>
-#include <input.hpp>
+
 #include <vector>
 #include <cstdint>
 #include <queue>
 #include <cassert>
 #include <array>
+#include <SDL3/SDL.h>
+#include <components/components.hpp>
 
 
 using Camera = uint8_t;

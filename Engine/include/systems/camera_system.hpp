@@ -1,7 +1,9 @@
 #pragma once
-#include <camera.hpp>
-#include <ecs.hpp>
-#include <components.hpp>
+
+#include <components/components.hpp>
+#include <SDL3/SDL.h>
+#include <ecs/ecs.hpp>
+#include <camera/camera.hpp>
 
 class CameraSystem : public System {
 

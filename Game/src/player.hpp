@@ -1,7 +1,4 @@
-#include <components.hpp>
-#include <ecs.hpp>
-#include <SDL3/SDL.h>
-#include <asset_manager.hpp>
+#include <include.hpp>
 
 class Player {
 

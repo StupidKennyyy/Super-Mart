@@ -1,5 +1,5 @@
 
-#include <asset_manager.hpp>
+#include <assets/asset_manager.hpp>
 
 
 std::unordered_map<std::string, SDL_Texture*> g_Textures;
@@ -42,7 +42,7 @@ void AssetManager::LoadTextures(std::filesystem::path AssetsDir, SDL_Renderer* r
 
 void AssetManager::DeloadTextures()
 {
-	for (auto pair : g_Textures)
+	for (auto& pair : g_Textures)
 	{
 		SDL_DestroyTexture(pair.second);
 	}

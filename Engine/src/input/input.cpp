@@ -1,8 +1,4 @@
-#include <SDL3/SDL.h>
-#include <iostream>
-#include <components.hpp>
-#include <input.hpp>
-
+#include <input/input.hpp>
 
 //
 // Keyboard

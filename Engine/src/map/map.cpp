@@ -1,6 +1,5 @@
-#include <map.hpp>
-#include <asset_manager.hpp>
-
+#include <map/map.hpp>
+#include <assets/asset_manager.hpp>
 
 void Map::InitializeGrid(const size_t GridWidth, const size_t GridHeight, Coordinator& coordinator)
 {

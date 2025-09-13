@@ -1,7 +1,5 @@
 #pragma once
-#include <ecs.hpp>
-#include <components.hpp>
-
+#include <include.hpp>
 
 class MovementSystem : public System {
 

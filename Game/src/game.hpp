@@ -1,12 +1,5 @@
-#include <SDL3/SDL.h>
-#include <engine.hpp>
-#include <camera.hpp>
-#include <input.hpp>
-#include <ecs.hpp>
-#include <components.hpp>
-#include <SDL3_image/SDL_image.h>
-#include <map.hpp>
 #include "player.hpp"
+#include <include.hpp>
 
 
 class Game {

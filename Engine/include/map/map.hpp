@@ -2,12 +2,9 @@
 #include <SDL3/SDL.h>
 #include <vector>
 #include <iostream>
-#include "render_systems.hpp"
-#include "components.hpp"
-#include "Tile.hpp"
-#include "camera.hpp"
-#include <ecs.hpp>
-#include <asset_manager.hpp>
+#include <components/Tile.hpp>
+#include <components/components.hpp>
+#include <ecs/ecs.hpp>
 
 using MapGrid = std::vector<std::vector<Entity>>;
 

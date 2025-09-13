@@ -1,15 +1,13 @@
 #pragma once
 
+#include <memory>
 #include <SDL3/SDL.h>
-#include <SDL3_image/SDL_image.h>
-#include <ecs.hpp>
-#include <render_systems.hpp>
-#include <asset_manager.hpp>
-#include <camera.hpp>
-#include <movement_system.hpp>
-#include <input_system.hpp>
-#include <camera_system.hpp>
-#include <collision_system.hpp>
+#include <ecs/ecs.hpp>
+#include <systems/camera_system.hpp>
+#include <systems/collision_system.hpp>
+#include <systems/input_system.hpp>
+#include <systems/movement_system.hpp>
+#include <systems/render_systems.hpp>
 
 class Engine {
 
