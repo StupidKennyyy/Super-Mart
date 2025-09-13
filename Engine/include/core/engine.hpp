@@ -3,11 +3,9 @@
 #include <memory>
 #include <SDL3/SDL.h>
 #include <ecs/ecs.hpp>
-#include <systems/camera_system.hpp>
-#include <systems/collision_system.hpp>
-#include <systems/input_system.hpp>
-#include <systems/movement_system.hpp>
-#include <systems/render_systems.hpp>
+#include <assets/asset_manager.hpp>
+#include <camera/camera.hpp>
+#include <utils/path_utils.hpp>
 
 class Engine {
 
@@ -27,13 +25,6 @@ public:
 	SDL_Renderer* Renderer = nullptr;
 	
 	Coordinator coordinator;
-
-	std::shared_ptr<TileRenderSystem> tileRenderSys;
-	std::shared_ptr<SpriteRenderSystem> spriteRenderSys;
-	std::shared_ptr<InputSystem> inputSys;
-	std::shared_ptr<MovementSystem> movementSys;
-	std::shared_ptr<CameraSystem> cameraSys;
-	std::shared_ptr<CollisionSystem> collisionSys;
 
 	AssetManager assetManager;
 

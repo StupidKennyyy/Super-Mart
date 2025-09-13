@@ -29,14 +29,6 @@
 
 #include "map/map.hpp"
 
-// Systems 
-
-#include "systems/camera_system.hpp"
-#include "systems/collision_system.hpp"
-#include "systems/input_system.hpp"
-#include "systems/movement_system.hpp"
-#include "systems/render_systems.hpp"
-
 // Utils
 
 #include <utils/path_utils.hpp>

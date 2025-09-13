@@ -17,7 +17,7 @@ public:
 			
 			rb.Velocity = { 0,0 };
 
-			if (input.up) rb.Velocity.y = -1.f;
+			if (input.up) rb.Velocity.y = -100.f;
 			if (input.down && !rb.Grounded) rb.Velocity.y = 1.f;
 			if (input.right) rb.Velocity.x = 1.f;
 			if (input.left) rb.Velocity.x = -1.f;

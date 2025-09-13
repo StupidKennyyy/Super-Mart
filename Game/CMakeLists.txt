@@ -1,7 +1,10 @@
 ﻿
-add_executable (Game src/main.cpp "src/game.hpp" "src/game.cpp"  "src/player.hpp")
+file(GLOB_RECURSE GAME_SRC_FILES "src/*.cpp")
+
+add_executable (Game ${GAME_SRC_FILES})
 
 target_link_libraries(Game PRIVATE Engine)
+target_include_directories(Game PRIVATE "include")
 
 add_custom_command(
 	TARGET Game POST_BUILD 
