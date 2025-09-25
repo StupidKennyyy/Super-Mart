@@ -5,6 +5,7 @@
 #include <systems/input_system.hpp>
 #include <systems/movement_system.hpp>
 #include <systems/render_systems.hpp>
+#include <SDL3/SDL.h>
 
 
 
@@ -29,6 +30,12 @@ public:
 	std::shared_ptr<CameraSystem> cameraSys;
 	std::shared_ptr<CollisionSystem> collisionSys;
 
+private:
+
+	float deltaTime = 0;
+	Uint64 now = 0;
+	Uint64 last = 0;
+
 
 public:
 
@@ -39,5 +46,9 @@ public:
 	void DeInit();
 
 	void InitializeGameSystems(Coordinator& coordinator);
+
+private:
+
+	void UpdateDeltaTime();
 
 };

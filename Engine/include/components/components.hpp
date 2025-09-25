@@ -1,11 +1,28 @@
 #pragma once
 #include <cstdint>
 #include <SDL3/SDL.h>
+#include <cmath>
 
 struct Vector2 {
 
 	float x = 0.0f;
 	float y = 0.0f;
+
+    float Length() const
+    {
+        return std::sqrtf(x * x + y * y);
+    }
+
+    void Normalize()
+    {
+        float len = Length();
+
+        if (len != 0) {
+            x /= len;
+            y /= len;
+        }
+    }
+
     // Addition
     Vector2 operator+(const Vector2& other) const {
         return Vector2(x + other.x, y + other.y);

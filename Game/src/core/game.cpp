@@ -42,7 +42,7 @@ void Game::Run()
 
 		cameraSys->Update(engine.cameraManager, engine.coordinator);
 
-		movementSys->Update(engine.coordinator);
+		movementSys->Update(engine.coordinator, deltaTime);
 
 		collisionSys->Update(engine.coordinator, map);
 
@@ -60,8 +60,16 @@ void Game::Run()
 	
 
 		input.updateState();
+		UpdateDeltaTime();
 	}
 
+}
+
+void Game::UpdateDeltaTime()
+{
+	now = SDL_GetTicks();
+	deltaTime = (now - last) / 1000.0f;
+	last = now;
 }
 
 void Game::InitializeGameSystems(Coordinator& coordinator)
