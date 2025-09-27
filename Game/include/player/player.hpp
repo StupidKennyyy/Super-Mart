@@ -23,7 +23,7 @@ public:
 			Sprite{
 				.texture = g_Textures["PLAYER.png"]
 			});
-		coordinator.AddComponent<RigidBody>(player, RigidBody{});
+		coordinator.AddComponent<RigidBody>(player, RigidBody{.Acceleration = 3000.f});
 
 		coordinator.AddComponent<InputComponent>(player, InputComponent{});
 

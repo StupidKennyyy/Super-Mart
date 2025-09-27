@@ -6,7 +6,9 @@ void Game::Init(const char* title, int width, int height)
 
 	InitializeGameSystems(engine.coordinator);
 
-	map.InitializeGrid(20,20, engine.coordinator);
+//	map.InitializeGrid(20,20, engine.coordinator);
+
+	map.LoadFromFile(engine.coordinator, GetAssetsPath());
 
 	renderer = engine.Renderer;
 

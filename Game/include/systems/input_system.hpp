@@ -16,7 +16,7 @@ public:
 
 			auto& input = coordinator.GetComponent<InputComponent>(entity);
 
-			input.up = input_.wasKeyPressed(SDL_SCANCODE_W);
+			input.up = input_.isKeyDown(SDL_SCANCODE_W);
 			input.down = input_.isKeyDown(SDL_SCANCODE_S);
 			input.right = input_.isKeyDown(SDL_SCANCODE_D);
 			input.left = input_.isKeyDown(SDL_SCANCODE_A);

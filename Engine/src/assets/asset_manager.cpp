@@ -9,10 +9,15 @@ void AssetManager::LoadTextures(std::filesystem::path AssetsDir, SDL_Renderer* r
 {
 	std::cout << "Assets Path -> " << AssetsDir.string() << std::endl;
 
-	if (!fs::exists(AssetsDir) && !fs::is_directory(AssetsDir))
+	fs::path TexturesFolder = AssetsDir / "Textures";
+
+	std::cout << "Textures Path -> " << TexturesFolder.string() << std::endl;
+
+
+	if (!fs::exists(TexturesFolder) && !fs::is_directory(TexturesFolder))
 		return;
 
-	for (const auto& entry : fs::directory_iterator(AssetsDir))
+	for (const auto& entry : fs::directory_iterator(TexturesFolder))
 	{
 
 		//std::cout << entry.path() << std::endl;

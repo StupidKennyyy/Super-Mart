@@ -85,8 +85,6 @@ public:
 					else
 						Correction.y += (PlayerRect.y < TileRect.y ? -Result.h : Result.h);
 				}
-				
-
 					
 			}
 
@@ -128,6 +126,11 @@ public:
 			{
 				PlayerRigidBody.Grounded = false;
 			}
+
+			if (PlayerRigidBody.Grounded)
+				std::cout << "Grounded" << std::endl;
+			else
+				std::cout << "\n";
 
 
 		}

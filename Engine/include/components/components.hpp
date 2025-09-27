@@ -83,6 +83,7 @@ struct Transform {
 struct RigidBody {
 
 	Vector2 Velocity;
+    Vector2 Acceleration;
     bool Grounded = false;
 };
 
